@@ -10,7 +10,28 @@
 // [!] create a main.cpp in the new directory that is a simple hello world
 // [] create a CMakeLists.txt file
 // [] auto build the new proejct in a build directory
-const std::string VERSION_ = "060926"; 
+const std::string VERSION_ = "060926";
+
+void createCMakeFile(const std::string &folderPath, const std::string projectName) {
+    std::string fileNane = folderPath + "/CMakeLists.txt";
+    std::cout << fileNane << "\n";
+    std::ofstream file;
+    file.open(fileNane);
+    if (!file.is_open()) {
+        std::cout << "Failed to create CMake file \n";
+        return;
+    }
+    file << "cmake_minimum_required(VERSION 3.22)\n";
+    file << "project("<< projectName << ")\n";
+    file << "\n";
+    file << "set (SOURCES\n";
+    file << "   main.cpp\n";
+    file << ")\n";
+    file << "\n";
+    file << "add_executable("<<projectName<<" ${SOURCES})\n";
+    return;
+}
+
 void createMain(const std::string &folderPath) {
     std::string fileNane = folderPath + "/main.cpp";
     std::cout << fileNane << "\n";
@@ -60,6 +81,7 @@ int main(int argc, char *argv[]) {
     std::cout << projectName << "\n";
     if (std::optional<std::string> dirPath = createDirectory(projectName)) {
         createMain(*dirPath);
+        createCMakeFile(*dirPath, projectName);
     } else {
         std::cout << "Failed to make folder for " << projectName << " exiting...\n";
         exit(0);
