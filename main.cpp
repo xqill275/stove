@@ -70,6 +70,7 @@ std::optional<std::string> createDirectory(const std::string &folderName) {
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
+        std::cout << "Build: " << VERSION_ << "\n";
         std::cout << "Usage:\n";
         std::cout << "    " << argv[0] << " <projectName> \n";
         exit(1);
