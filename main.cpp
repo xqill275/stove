@@ -55,13 +55,6 @@ std::optional<std::string> createDirectory(const std::string &folderName) {
     if (!folder) {
         return std::nullopt;
     }
-
-    std::filesystem::permissions(folderName,
-                    std::filesystem::perms::owner_all |
-                    std::filesystem::perms::group_all |
-                    std::filesystem::perms::others_all,
-                    std::filesystem::perm_options::replace);
-
     std::filesystem::path newDir = folderName;
     std::filesystem::path currentPath = std::filesystem::current_path();
     currentPath /= newDir;
